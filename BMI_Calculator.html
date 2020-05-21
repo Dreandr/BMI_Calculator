@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>BMI Calculator</title>
+	<style type="text/css">
+		textarea {
+			width: 600px;
+			height: 200px;
+			font-size: 2em;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<h1>BMI Calculator</h1>
+	<p>Hi! Welcome to the Body Mass Index (BMI) Calculator. The BMI is a desrciptive statistic that uses your height and weight to give you an estimate of your body fat level. A BMI between 18.5 to 25 is seen as the norm for adult men and women; if it falls below or above that range, this could be a sign of health issues.</p>
+	<p>To use the calculator, simply put in your height and weight in the fields below and click "Submit". If you want to learn more about where you land in your age and gender group, go on to use the optional form after that.</p>
+	<form id="required" onsubmit="return false">
+	  <label for="weight">Your weight in kilograms:</label>
+	  <input type="text" id="weight" name="weight"><br><br>
+	  <label for="height">Your height in centimeters:</label>
+	  <input type="text" id="height" name="height"><br><br>
+	  <input type="submit" value="Submit">
+	</form>
+	<br>
+	<label for="output" style="font-size: 2em;">Your BMI is:<br></label><textarea name="output" readonly="true" id="output_area"></textarea>
+	<br>
+	<p>Select your gender and pick your age in the form below to learn more about where you BMI stabds in regards to your age and gender group.</p>
+	<form id="optional">
+	  <label for="age">Your age:</label>
+	  <input type="text" id="age" name="age"><br><br>
+	  <label for="gender">Your gender:</label><br>
+	  <input type="radio" id="male" name="gender" value="male">
+	  <label for="male">Male</label><br>
+	  <input type="radio" id="female" name="gender" value="female">
+	  <label for="female">Female</label><br>
+	  <input type="submit" value="Submit">
+	</form>
+	<script type="text/javascript">
+		let form1 = document.getElementById("required");
+		let form2 = document.getElementById("optional");
+		let result = document.getElementById("output_area");
+
+		form1.addEventListener("submit",form1Submit);
+		form2.addEventListener("submit",form2Submit);
+
+		function form1Submit(){
+			let weight = parseFloat(form1.children[1].value, 10);
+			if (isNaN(weight) == true) {
+				alert("Cannot calculate your BMI! Make sure you put in your weight correctly.")
+			} else {
+				let height = parseFloat(form1.children[5].value, 10);
+				if (isNaN(weight) == true) {
+					alert("Cannot calculate your BMI! Make sure you put in your weight correctly.")
+				} else {
+					height = height/100;
+					let output = Math.round(weight/Math.pow(height,2));
+					let text = "";
+					if (output < 16){
+						text = "You are severely underweight! This may indicate malnutrition or an eating disorded. Please consider consulting a doctor.";
+						result.value = `${output}\n\n${text}`;
+						result.style.backgroundColor = "rgba(208, 33, 27, 0.61)";
+						//return false;
+					} else if (output < 18.5){
+						console.log(`${16 < output < 18.5}, ${output} -- the output`);
+						text = "You are underweight. This may be indicative of some underlying health problems, so you may want to consider a visit to a doctor.";
+						result.value = `${output}\n\n${text}`;
+						result.style.backgroundColor = "rgba(208, 178, 27, 0.61)";
+						//return false;
+					} else if (output < 25){
+						text = "You have a normal BMI! Nothing to worry about.";
+						result.value = `${output}\n\n${text}`;
+						result.style.backgroundColor = "rgba(51, 208, 27, 0.61)";
+						//return false;
+					} else if (output < 30){
+						text = "You are overweight. Excess weight is linked with a number of medical conditions, so a change of diet or extra workout routine may be advisable.";
+						result.value = `${output}\n\n${text}`;
+						result.style.backgroundColor = "rgba(208, 178, 27, 0.611)";
+						//return false;
+					} else {
+						text = "You are obese. Obesity is a condition in which the amout of excess fat in your body becomes detrimental to your health, so make sure to visit a doctor!";
+						result.value = `${output}\n\n${text}`;
+						result.style.backgroundColor = "rgba(208, 33, 27, 0.61)";
+						//return false;
+					}
+				}
+			}
+		}		
+	</script>
+</body>
+</html>
