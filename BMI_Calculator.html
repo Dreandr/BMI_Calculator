@@ -14,13 +14,41 @@
 			padding-top: 4%;
 			margin-top: 2%;
 		}
+		.collapsible {
+		  background-color: #777;
+		  color: white;
+		  cursor: pointer;
+		  padding: 18px;
+		  width: 100%;
+		  border: none;
+		  text-align: left;
+		  outline: none;
+		  font-size: 15px;
+		  margin-bottom: 2%;
+		}
+
+		.active, .collapsible:hover {
+		  background-color: #555;
+		}
+
+		.content {
+		  padding: 0 18px;
+		  display: none;
+		  overflow: hidden;
+		  background-color: #f1f1f1;
+		  margin-bottom: 2%;
+		  margin-top: -2%;
+		}
 	</style>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 <body>
 	<h1>BMI Calculator</h1>
-	<p>Hi! Welcome to the Body Mass Index (BMI) Calculator. The BMI is a desrciptive statistic that uses your height and weight to give you an estimate of your body fat level. A BMI between 18.5 to 25 is seen as the norm for adult men and women; if it falls below or above that range, this could be a sign of health issues.</p>
-	<p>To use the calculator, simply put in your height and weight in the fields below and click "Submit". If you want to learn more about where you land in your age and gender group, go on to use the optional form after that.</p>
+	<p>Hi! Welcome to the BMI Calculator. To calculate your BMI, simply put in your height and weight in the fields below and click "Submit". If you want to learn more about where you land in your age and gender group, go on to use the optional form after that.</p>
+	<button type="button" class="collapsible">What is BMI?</button>
+	<div class="content">
+	  <p>The Body Mass Index (BMI) is a descriptive statistic that uses your height and weight to give you an estimate of your body fat level. A BMI between 18.5 to 25 is seen as the norm for adult men and women; if it falls below or above that range, this could be a sign of health issues.</p>
+	</div>
 	<form id="required" onsubmit="return false">
 	  <label for="weight">Your weight in kilograms:</label>
 	  <input type="text" id="weight" name="weight"><br><br>
@@ -141,7 +169,21 @@
 				newDiv.appendChild(text2);
 				document.body.appendChild(newDiv);
 			}
-		}			
+		}
+
+		let coll = document.getElementsByClassName("collapsible")[0];
+		coll.addEventListener("click", collapse)
+		function collapse(){
+		    this.classList.toggle("active");
+		    let content = this.nextElementSibling;
+		    if (content.style.display === "block") {
+		      content.style.display = "none";
+		    } else {
+		      content.style.display = "block";
+		    }
+		  }
+			
 	</script>
+		
 </body>
 </html>
