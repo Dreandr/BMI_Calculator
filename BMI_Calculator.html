@@ -18,10 +18,21 @@
 		.grid-container {
 			  display: grid;
 			  grid-template-areas:
+			    'header'
+			    'main'
+			    'extra';
+			  padding: 15px;
+			  grid-gap: 15px;
+		}
+		@media only screen and (min-width: 840px) {
+		.grid-container {
+			  display: grid;
+			  grid-template-areas:
 			    'header header header header header'
 			    'main main main extra extra';
 			  padding: 15px;
 			  grid-gap: 15px;
+		}
 		}
 		.header { grid-area: header; }
 		.main { grid-area: main; }
@@ -73,7 +84,7 @@
 		  <input type="submit" value="Submit">
 		</form>
 		<br>
-		<label for="output" style="font-size: 2em;">Your BMI is:<br></label><textarea name="output" readonly="true" id="output_area"></textarea>
+		<label for="output" style="font-size: 2em;">Your BMI is:</label><br><textarea name="output" readonly="true" id="output_area"></textarea>
 		<br>
 	</div>
 	<div class="extra">
