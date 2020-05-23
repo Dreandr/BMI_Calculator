@@ -93,7 +93,8 @@
 		let form1 = document.getElementById("required");
 		let form2 = document.getElementById("optional");
 		let result = document.getElementById("output_area");
-		let gender = document.getElementsByName('gender')
+		let gender = document.getElementsByName('gender');
+		let extra = document.getElementsByClassName("extra")[0];
 
 		form1.addEventListener("submit",form1Submit);
 		form2.addEventListener("submit",form2Submit);
@@ -104,6 +105,10 @@
 		let gen;
 
 		function form1Submit(){
+			if (extra.children.length == 3){
+				let removable = extra.children[extra.children.length-1];
+				removable.parentNode.removeChild(removable);
+			}
 			let weight = parseFloat(form1.children[1].value, 10);
 			if (isNaN(weight) == true) {
 				alert("Cannot calculate your BMI! Make sure you put in your weight correctly.")
