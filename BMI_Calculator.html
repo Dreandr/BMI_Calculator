@@ -78,10 +78,19 @@
 	</div>
 	<div class="main">
 		<form id="required" onsubmit="return false">
-		  <label for="weight">Your weight in kilograms:</label>
-		  <input type="text" id="weight" name="weight"><br><br>
-		  <label for="height">Your height in centimeters:</label>
-		  <input type="text" id="height" name="height"><br><br>
+		  <label for="weight">Your weight:</label>
+		  <input type="text" id="weight" name="weight">
+		  <select id="weight_units" name="weight_units">
+			  <option value="kilograms" selected="selected">kilograms</option>
+			  <option value="pounds">pounds</option>
+			</select><br><br>
+		  <label for="height">Your height:</label>
+		  <input type="text" id="height" name="height">
+		  <select id="height_units" name="height_units">
+			  <option value="meters" selected="selected">meters</option>
+			  <option value="feet">feet</option>
+			</select>
+		  <br><br>
 		  <input type="submit" value="Submit">
 		</form>
 		<br>
@@ -153,11 +162,16 @@
 			if (isNaN(weight) == true) {
 				alert("Cannot calculate your BMI! Make sure you put in your weight correctly.")
 			} else {
-				let height = parseFloat(form1.children[5].value, 10);
+				if (document.forms[0].children[2].selectedIndex != 0){
+					weight = weight*0.45359237;
+				}
+				let height = parseFloat(form1.children[6].value, 10);
 				if (isNaN(weight) == true) {
 					alert("Cannot calculate your BMI! Make sure you put in your height correctly.")
 				} else {
-					height = height/100;
+					if (document.forms[0].children[7].selectedIndex != 0){
+					height = height*0.3048;
+					}
 					output = Math.round(weight/Math.pow(height,2));
 					let text = "";
 					if (output < 16){
